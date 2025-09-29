@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Logo -->
+<div class="logo">
+  <img src="https://product-assets.faasos.io/eatsure_cms/production/40b749ef-2fa3-430f-ae4d-2c9ddf7bc6fc.png" alt="Kwality Wall's Logo">
+</div>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kwality Wall's - Soft Pastel Gallery</title>
+<link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhai+2&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Baloo Bhai 2', cursive;
+  background: linear-gradient(135deg, #ffe0f0, #fff9e6, #d0f0ff);
+  overflow-x: hidden;
+}
+
+/* Section */
+.dessert-gallery {
+  text-align: center;
+  padding: 60px 20px;
+  position: relative;
+}
+
+/* Header */
+.dessert-gallery h2 {
+  font-size: 3em;
+  color: #780f28; /* soft pink */
+  text-shadow: 0 0 5px rgba(255,111,145,0.5);
+  margin-bottom: 10px;
+}
+
+.dessert-gallery p.subtext {
+  font-size: 1.2em;
+  margin-bottom: 50px;
+  color: #555;
+}
+
+/* Gallery Grid */
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+/* Card Flip Container */
+.card {
+  width: 220px;
+  height: 300px;
+  perspective: 1000px;
+  position: relative;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.card:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Card Faces */
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  backface-visibility: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Front */
+.card-front {
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  overflow: hidden;
+}
+
+.card-front img {
+  width: 100%;
+  height: 180px;
+  border-radius: 15px;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.card-front:hover img {
+  transform: scale(1.05);
+}
+
+.card-front h3 {
+  margin: 10px 0 5px;
+  color: #6f42c1; /* soft purple */
+}
+
+/* Back */
+.card-back {
+  background: rgba(255, 255, 255, 0.85);
+  transform: rotateY(180deg);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-back p {
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 0.95em;
+  text-align: center;
+}
+
+.button-container {
+  display: flex;
+  gap: 10px;
+}
+
+.add-cart, .like-btn {
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.add-cart {
+  background-color: #ffb3c6; /* pastel pink */
+  color: #fff;
+  border: none;
+}
+
+.add-cart:hover {
+  background-color: #ff99aa;
+  transform: scale(1.1);
+}
+
+.like-btn {
+  background-color: #d0f0ff; /* pastel blue */
+  border: 2px solid #a0e0ff;
+  color: #333;
+}
+
+.like-btn.liked {
+  background-color: #a0e0ff;
+  color: #fff;
+  transform: scale(1.2);
+}
+/* Logo Styling */
+.logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+.logo img {
+  width: 120px; /* adjust size as needed */
+  height: auto;
+  border-radius: 10px;
+}
+
+
+/* Floating Sprinkles */
+.sprinkle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  animation: float 10s infinite alternate;
+  opacity: 0.8;
+}
+
+
+.sprinkle:nth-child(1) { background-color: #ffb3c6; left: 5%; animation-delay: 0s; }
+.sprinkle:nth-child(2) { background-color: #ffd9a6; left: 20%; animation-delay: 2s; }
+.sprinkle:nth-child(3) { background-color: #a6e0ff; left: 40%; animation-delay: 4s; }
+.sprinkle:nth-child(4) { background-color: #ffc6ff; left: 60%; animation-delay: 6s; }
+.sprinkle:nth-child(5) { background-color: #c6ffd9; left: 80%; animation-delay: 8s; }
+
+@keyframes float {
+  0% { transform: translateY(0) translateX(0); opacity:0.8; }
+  50% { transform: translateY(-200px) translateX(20px); opacity:0.5; }
+  100% { transform: translateY(-400px) translateX(-20px); opacity:0; }
+}
+
+/* Footer */
+footer {
+  background: #ff6f61;
+  color: #fff;
+  text-align: center;
+  padding: 20px 10px;
+  margin-top: 40px;
+  font-size: 1em;
+  letter-spacing: 1px;
+}
+
+/* Media Queries */
+@media (max-width: 600px) {
+  .gallery {
+    flex-direction: column;
+    align-items: center;
+  }
+  .card {
+    width: 80%;
+    height: 280px;
+  }
+}
+</style>
+</head>
+<body>
+
+<section class="dessert-gallery">
+  <h2 data-aos="fade-down">🍨 Soft Pastel Ice Cream Gallery</h2>
+  <p class="subtext" data-aos="fade-up">Interactive, fun, and easy on the eyes!</p>
+
+  <div class="gallery">
+    <!-- Card 1 -->
+    <div class="card" data-aos="zoom-in">
+      <div class="card-inner">
+        <div class="card-front">
+          <img src="https://5.imimg.com/data5/ANDROID/Default/2023/3/296394503/XF/OL/ZY/51256655/product-jpeg.jpg" alt="Chocolate Cone">
+          <h3>Chocolate Cone</h3>
+        </div>
+        <div class="card-back">
+          <p>Crunchy cone filled with creamy chocolate delight!</p>
+          <div class="button-container">
+            <button class="add-cart">Add Cart</button>
+            <button class="like-btn" onclick="toggleLike(this)">❤</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card" data-aos="zoom-in" data-aos-delay="100">
+      <div class="card-inner">
+        <div class="card-front">
+          <img src="https://www.bbassets.com/media/uploads/p/xl/40198839_1-kwality-walls-sundae-cup.jpg" alt="Choco Sundae">
+          <h3>Choco Sundae</h3>
+        </div>
+        <div class="card-back">
+          <p>Layers of ice cream, chocolate syrup, and nuts.</p>
+          <div class="button-container">
+            <button class="add-cart">Add Cart</button>
+            <button class="like-btn" onclick="toggleLike(this)">❤</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card" data-aos="zoom-in" data-aos-delay="200">
+      <div class="card-inner">
+        <div class="card-front">
+          <img src="https://assets.unileversolutions.com/v1/1862863.png" alt="Vanilla Ice Cream">
+          <h3>Vanilla Ice Cream</h3>
+        </div>
+        <div class="card-back">
+          <p>Classic vanilla scoop with a creamy twist.</p>
+          <div class="button-container">
+            <button class="add-cart">Add Cart</button>
+            <button class="like-btn" onclick="toggleLike(this)">❤</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="card" data-aos="zoom-in" data-aos-delay="300">
+      <div class="card-inner">
+        <div class="card-front">
+          <img src="https://assets.unileversolutions.com/v1/1862830.png" alt="Ice Cream Cake">
+          <h3>Ice Cream Cake</h3>
+        </div>
+        <div class="card-back">
+          <p>Heavenly blend of cake and ice cream!</p>
+          <div class="button-container">
+            <button class="add-cart">Add Cart</button>
+            <button class="like-btn" onclick="toggleLike(this)">❤</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="card" data-aos="zoom-in" data-aos-delay="400">
+      <div class="card-inner">
+        <div class="card-front">
+          <img src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=360/da/cms-assets/cms/product/3edc619b-271f-46d2-8a99-0f912154fe54.png" alt="Chocolate Delight">
+          <h3>Chocolate Delight</h3>
+        </div>
+        <div class="card-back">
+          <p>Rich chocolate heaven with sprinkles.</p>
+          <div class="button-container">
+            <button class="add-cart">Add Cart</button>
+            <button class="like-btn" onclick="toggleLike(this)">❤</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="card" data-aos="zoom-in" data-aos-delay="500">
+      <div class="card-inner">
+        <div class="card-front">
+          <img src="https://assets.unileversolutions.com/v1/1862860.png" alt="Strawberry Sundae">
+          <h3>Strawberry Sundae</h3>
+        </div>
+        <div class="card-back">
+          <p>Sweet strawberries with creamy ice cream layers.</p>
+          <div class="button-container">
+            <button class="add-cart">Add Cart</button>
+            <button class="like-btn" onclick="toggleLike(this)">❤</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 7 -->
+    <div class="card" data-aos="zoom-in" data-aos-delay="600">
+      <div class="card-inner">
+        <div class="card-front">
+          <img src="https://assets.unileversolutions.com/v1/1868050.png" alt="Mango Ice Cream">
+          <h3>Mango Ice Cream</h3>
+        </div>
+        <div class="card-back">
+          <p>Refreshing mango flavor, perfect for summer!</p>
+          <div class="button-container">
+            <button class="add-cart">Add Cart</button>
+            <button class="like-btn" onclick="toggleLike(this)">❤</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 8 -->
+    <div class="card" data-aos="zoom-in" data-aos-delay="700">
+      <div class="card-inner">
+        <div class="card-front">
+          <img src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=360/da/cms-assets/cms/product/01b7783a-ba0c-4e12-a744-6e5c3ddb1e70.png" alt="Caramel Swirl">
+          <h3>Choco Vanilla Frozen Dessert Sandwich</h3>
+        </div>
+        <div class="card-back">
+          <p>Sweet caramel with creamy delight.</p>
+          <div class="button-container">
+            <button class="add-cart">Add Cart</button>
+            <button class="like-btn" onclick="toggleLike(this)">❤</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Floating Sprinkles -->
+  <div class="sprinkle"></div>
+  <div class="sprinkle"></div>
+  <div class="sprinkle"></div>
+  <div class="sprinkle"></div>
+  <div class="sprinkle"></div>
+</section>
+
+<footer data-aos="fade-up">
+  &copy; 2025 Kwality Wall's. All Rights Reserved. 
+</footer>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+AOS.init({
+  duration: 1000,
+  once: true
+});
+
+function toggleLike(btn) {
+  btn.classList.toggle('liked');
+}
+</script>
+</body>
+</html>
